@@ -1,0 +1,91 @@
+﻿@model EquipmentManager.Models.Account
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="card">
+    <div class="card-body">
+        <h3>Chi tiết tài khoản</h3>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Code)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Code)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.Gender == true)
+                {
+                    @Html.Raw("Nữ")
+                }
+                else
+                {
+                    @Html.Raw("Nam")
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @String.Format("{0:dd/MM/yyyy}",Model.Birthday)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Birthday)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.Status== true)
+                {
+                    @Html.Raw("Hoạt động")
+                }
+                else
+                {
+                    @Html.Raw("Ngừng hoạt động")
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RoleId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Role.Name)
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" value="Create" class="btn btn-info"><i class="fas fa-edit" style="color:#5b5bca;"></i> Sửa</a>
+        <a type="submit" asp-action="Index" class="btn btn-default float-right"><i class="fas fa-undo-alt"></i></a>
+    </div>
+</div>

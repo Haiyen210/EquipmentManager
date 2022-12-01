@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="card card-danger" style="margin-top: 40px;">
+    <div class="row">
+        <div class="col-lg-3 col-6">
+
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@ViewData["category"]</h3>
+                    <p>Danh mục</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@ViewData["product"]</h3>
+                    <p>Sản Phẩm</p>
+                </div>
+                <div class="icon">
+                    <i class="fab fa-product-hunt"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>@ViewData["order"]</h3>
+                    <p>Giỏ hàng</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>@ViewData["account"]</h3>
+                    <p>Tài khoản</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-alt"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+    }

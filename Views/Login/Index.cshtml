@@ -1,0 +1,65 @@
+﻿@model EquipmentManager.Models.Login
+<div id="page-content">
+    <!--Collection Banner-->
+    <div class="collection-header">
+        <div class="collection-hero">
+            <div class="collection-hero__image"></div>
+            <div class="collection-hero__title-wrapper container">
+                <h1 class="collection-hero__title">Đăng nhập</h1>
+                <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Trang chủ</a><span>|</span><span class="fw-bold">Đăng nhập</span></div>
+            </div>
+        </div>
+    </div>
+    <!--End Collection Banner-->
+    <!--Container-->
+    <div class="container">
+        <!--Main Content-->
+        <div class="login-register pt-2 pt-lg-5">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-md-0">
+                    <div class="inner">
+                        <form method="post" action="" class="customer-form">
+                            <h3 class="h4 text-uppercase">Đăng Nhập</h3>
+                            <p>Nếu bạn có một tài khoản với chúng tôi, xin vui lòng đăng nhập.</p>
+                            <p class="text-center" style="color:red">@Html.ValidationMessage("Lỗi")</p>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="CustomerEmail" class="d-none">Tên tài khoản <span class="required">*</span></label>
+                                        <input type="text" placeholder="Tên đănh nhập" asp-for="Code" />
+                                        <span asp-validation-for="Code" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="CustomerPassword" class="d-none">Mật khẩu <span class="required">*</span></label>
+                                        <input type="password" placeholder="Mật khẩu" asp-for="Password" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <p class="d-flex-center">
+                                        <button type="submit" class="btn rounded me-auto">Đăng nhập</button>
+                                        <a href="forgot-password.html">Quên mật khẩu?</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="inner">
+                        <h3 class="h4 text-uppercase">Tài khoản mới?</h3>
+                        <p>Đăng ký cho trang web này cho phép bạn truy cập trạng thái và lịch sử đặt hàng của bạn. Chúng tôi sẽ thiết lập một tài khoản mới cho bạn ngay lập tức. Vì điều này sẽ chỉ yêu cầu bạn cung cấp thông tin cần thiết để giúp quá trình mua hàng nhanh hơn và dễ dàng hơn</p>
+                        <a asp-controller="Register" asp-action="Index" class="btn rounded">Tạo một tài khoản mới</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Main Content-->
+    </div>
+    <!--End Container-->
+</div>
+<!--End Body Container-->

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EquipmentManager</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="~/assets/images/favicon.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="~/assets/css/plugins.css" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="~/assets/css/style.css" />
+    <link rel="stylesheet" href="~/assets/css/responsive.css" />
+
+</head>
+
+<body class="template-index index-demo12 template-product">
+    <div class="page-wrapper">
+        <!--Header wrap-->
+      <partial name="_Header"/>
+        <!--End Mobile Menu-->
+
+        <main role="main">
+            @RenderBody()
+        </main>
+
+        <partial name="_Footer"/>
+        <script src="~/assets/js/vendor/jquery-min.js"></script>
+        <script src="~/assets/js/vendor/js.cookie.js"></script>
+        <!--Including Javascript-->
+        <script src="~/assets/js/plugins.js"></script>
+        <script src="~/assets/js/main.js"></script>
+
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

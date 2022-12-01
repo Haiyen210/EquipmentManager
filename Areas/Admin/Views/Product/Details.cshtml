@@ -1,0 +1,77 @@
+﻿@model EquipmentManager.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row mb-2">
+    <div class="col-sm-6">
+        <h3>Chi tiết sản phẩm</h3>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+            <li class="breadcrumb-item active">Chi tiết sản phẩm</li>
+        </ol>
+    </div>
+</div>
+
+
+
+<div class="card card-solid">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="col-12">
+                    <img src="~/images/@Model.Images" class="product-image" alt="Product Image">
+                </div>
+
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3 class="my-3"> @Model.Name - @Model.Code</h3>
+                <p>@Model.Description </p>
+                
+                <p>Danh mục: @Model.Category.Name</p>
+                
+                <p>
+                    Trạng thái:  @if (Model.Status == true)
+                    {
+                        @Html.Raw("Hoạt động")
+                    }
+                    else
+                    {
+                        @Html.Raw("Ngừng hoạt động")
+                    }
+                </p>
+                <div class="">
+                    @if (@Model.SalePrice == 0)
+                    {
+                        <p> Giá tiền: <span style="font-size: x-large;"> @string.Format("{0:0,00}", Model.Price)  vnđ</span></p>
+                    }
+                    @if (@Model.SalePrice > 0)
+                    {
+                        <p class="mb-0">
+                            Giá tiền: <span style="font-size: x-large;">@string.Format("{0:0,00}", Model.SalePrice)vnđ</span> &nbsp; <del>@string.Format("{0:0,00}", Model.Price) vnđ</del>
+                        </p>
+                       
+                    }
+
+                </div>
+              
+
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="mt-4">
+                <div class="btn  btn-default btn-lg btn-flat">
+                    <a asp-action="Edit" asp-route-id="@Model?.Id"><i class="fas fa-edit" style="color:#5b5bca;">Sửa</i></a>
+                </div>
+                <div class="btn btn-default btn-lg btn-flat">
+                    <a asp-action="Index"><i class="fas fa-undo-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

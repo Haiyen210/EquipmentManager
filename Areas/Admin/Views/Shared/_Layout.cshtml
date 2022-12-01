@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EquipmentManager</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EquipmentManager.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="../../../code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/plugins/jqvmap/jqvmap.min.css">
+
+    <link rel="stylesheet" href="~/dist/css/adminlte.min2167.css?v=3.2.0">
+
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+    <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+
+    <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+</head>
+<body>
+    <partial name="_HeaderPartial" />
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/plugins/chart.js/Chart.min.js"></script>
+
+    <script src="~/plugins/sparklines/sparkline.js"></script>
+
+    <script src="~/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+
+    <script src="~/plugins/jquery-knob/jquery.knob.min.js"></script>
+
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script src="~/plugins/summernote/summernote-bs4.min.js"></script>
+
+    <script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+    <script src="~/dist/js/adminlte2167.js?v=3.2.0"></script>
+    <script src="~/plugins/summernote/summernote-bs4.min.js"></script>
+
+    <script src="~/plugins/chart.js/Chart.min.js"></script>
+
+    <script src="~/dist/js/pages/dashboard.js"></script>
+    <script>
+        $(function () {
+            // Summernote
+            $('#summernote').summernote()
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+           
+        })
+
+    </script>
+    <script>
+        $('.fileinput-button').click(function () {
+            $('#select_file').click();
+        })
+        $('#select_file').change(function () {
+            var file = $(this)[0].files[0];
+            var reader = new FileReader();
+            reader.onload = function (ev) {
+                $('img#show_img').attr('src', ev.target.result);
+            }
+            reader.readAsDataURL(file);
+        })
+        $('.fileinput-orther').click(function () {
+            $('#orther_image').click();
+        })
+        $('#orther_image').change(function () {
+            var files = $(this)[0].files;
+            $('#show_other_image').html('');
+            if (files && files.length) {
+                for (let i = 0; i < files.length; i++) {
+                    const fi = files[i];
+                    var reader = new FileReader();
+                    reader.onload = function (ev) {
+                        var _image = '<div class="col-md-3">';
+                        _image += '<img src="' + ev.target.result + '" width="100%">';
+                        _image += '</div>';
+                        $('#show_other_image').append(_image);
+                    }
+                    reader.readAsDataURL(fi);
+                }
+            }
+        })
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

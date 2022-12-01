@@ -1,0 +1,264 @@
+﻿<!--Body Container-->
+<div id="page-content">
+    <!--Home slider-->
+    <section class="slideshow slideshow-wrapper">
+        <div class="home-slideshow">
+            @foreach (var item in ViewBag.banner)
+            {
+                <div class="slide slider1">
+                    <div class="slideshow--large bg-size">
+                        <img class="bg-img blur-up lazyload" data-src="~/images/@item.Images" src="~/images/@item.Images" alt="slideshow" title="" />
+                        <div class="slideshow-content slideshow-overlay middle-left container d-flex justify-content-center align-items-center">
+                            <div class="slideshow-content-in text-left">
+                                <div class="wrap-caption animation style4">
+                                    <h2 class="mega-title ss-mega-title mb-3 lh-1 fw-bold text-white" style="font-size:47px">@item.Name</h2>
+                                    <span class="mega-subtitle ss-sub-title mb-4 lh-base d-none d-md-block text-white">@item.Description</span>
+                                    <div class="ss-btnWrap">
+                                        <a class="btn btn-sm btn-primary rounded px-4" asp-route="product">Mua ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+    <!--End Home slider-->
+    <!--Collection Slider Section-->
+
+    <!--Most Popular-->
+    <section class="section product-items pb-0">
+        <div class="container">
+           <div class="section-header">
+               <h2>SẢN PHẨM MỚI NHẤT</h2>
+            </div>
+
+            <!--Product List-->
+            <div class="product-load-more">
+                <!--Product Grid-->
+                <div class="grid-products grid--view-items">
+                    <div class="row">
+                         @foreach (var item in ViewBag.product)
+                             {
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                            <!--Start Product Image-->
+                            <div class="product-image">
+                                <!--Start Product Image-->
+                                    <a asp-route="detail" asp-route-id="@item.Id" class="product-img">
+                                    <!-- image -->
+                                        <img  class="primary blur-up lazyload" data-src="/images/@item.Images" src="~/images/@item.Images" alt="" style="height: 200px;">
+                                    <!-- End image -->
+                                    <!-- Hover image -->
+                                        <img  class="hover blur-up lazyload" data-src="/images/@item.Images" src="~/images/@item.Images" alt="" title="" style="height: 200px;">
+                                    <!-- End hover image -->
+                                    <!-- product label -->
+                                    <!-- End product label -->
+                                </a>
+                                <!--End Product Image-->
+                                <!--Product Button-->
+                                <div class="button-set style0 d-none d-md-block">
+                                    <ul>
+                                        <!--Cart Button-->
+                                        <li><a class="btn-icon btn cartIcon " asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Giỏ hàng</span></a></li>
+                                        <!--End Cart Button-->
+                                        <!--Quick View Button-->
+                                            <li><a class="btn-icon btn cartIcon" asp-route="detail" asp-route-id="@item.Id"><i class="icon an an-search-l"></i></a></li>
+                                        <!--End Quick View Button-->
+                                        <!--Wishlist Button-->
+                                        <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Yêu thích</span></a></li>
+                                        <!--End Wishlist Button-->
+                                       
+                                    </ul>
+                                </div>
+                                <!--End Product Button-->
+                            </div>
+                            <!--End Product Image-->
+                            <!--Start Product Details-->
+                            <div class="product-details text-center">
+                                <!--Product Name-->
+                                <div class="product-name text-uppercase">
+                                        <a asp-route="detail" asp-route-id="@item.Id">@item.Name</a>
+                                </div>
+                                <!--End Product Name-->
+                                <!--Product Price-->
+                                <div class="product-price">
+                                    @if(item.SalePrice == 0){
+                                       @*  <span class="old-price">$199.00</span>*@
+                                          <span class="price">@string.Format("{0:0,00}", item.Price)vnđ</span>
+                                    }
+                                   @if(item.SalePrice > 0){
+                                        <span class="old-price">@string.Format("{0:0,00}", item.Price)vnđ</span>
+                                          <span class="price">@string.Format("{0:0,00}", item.SalePrice)vnđ</span>
+                                   }
+                                </div>
+                                <!--End Product Price-->
+                               
+                            </div>
+                            <!--End Product Details-->
+                        </div>
+                       }
+                    </div>
+                </div>
+                <!--End Product Grid-->
+            </div>
+            <!--End Product List-->
+        </div>
+    </section>
+    <!--End Most Popular-->
+
+    <!--Parallax Banner-->
+    <div class="section parallax-banner-style4 pt-0">
+        <div class="hero hero--large hero__overlay bg-size">
+            <img class="bg-img" src="/images/banner_1.jpg" alt="parallax-banner" />
+            <div class="hero__inner">
+                <div class="container">
+                    <div class="wrap-text center text-small font-bold mw-100 bg-transparent">
+                        <div class="mega-subtitle text-transform-none mb-1 ">BÁN NHIỀU HƠN...</div>
+                        <h1 class="mega-title text-transform-none ">NƯỚC LÀ MÁU CỦA SỰ SỐNG</h1>
+                        <p class="details d-none d-md-block ">Nước sạch, nhà vệ sinh cơ bản và thực hành vệ sinh tốt là điều cần thiết cho sự sống còn và phát triển của trẻ em ở Việt Nam.</p>
+                        <a asp-route="product" class="btn btn-primary btn-sm rounded mb-0 text-capitalize">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Parallax Banner-->
+    <!--Product Slider-->
+    <section class="section product-slider pt-0">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sản Phẩm Khuyến Mại</h2>
+            </div>
+
+            <div class="productSlider-style2 grid-products">
+
+                @foreach (var item in ViewBag.productSale)
+                {
+
+                <div class="item">
+                    <!--Start Product Image-->
+                    <div class="product-image">
+                        <!--Start Product Image-->
+                            <a asp-route="detail" asp-route-id="@item.Id" class="product-img">
+                            <!--Image-->
+                                <img class="primary blur-up lazyload" data-src="/images/@item.Images" src="~/images/@item.Images" alt="image" title="" style="height: 240px;">
+                            <!--End Image-->
+                            <!--Hover Image-->
+                                <img class="hover blur-up lazyload" data-src="/images/@item.Images" src="/images/@item.Images" alt="image" title=""  style="height: 240px;">
+                            <!--End Hover Image-->
+                        </a>
+                        <!-- End Product Image -->
+                        <!--Product label-->
+                        <div class="product-labels"><span class="lbl on-sale rounded-2">Khuyến mại</span></div>
+                        <!--End Product label-->
+                        <!--Product Button-->
+                        <div class="button-set style0 d-none d-md-block">
+                            <ul>
+                                <!--Cart Button-->
+                                    <li><a class="btn-icon btn cartIcon " asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Giỏ hàng</span></a></li>                                <!--End Cart Button-->
+                                <!--Quick View Button-->
+                                    <li><a class="btn-icon  btn cartIcon" asp-route="detail" asp-route-id="@item.Id"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Chi tiết sản phẩm</span></a></li>
+                                <!--End Quick View Button-->
+                                <!--Wishlist Button-->
+                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Yêu thích</span></a></li>
+                                <!--End Wishlist Button-->
+                            </ul>
+                        </div>
+                        <!--End Product Button-->
+                    </div>
+                    <!-- End Product Image -->
+                    <!--Start Product Details-->
+                    <div class="product-details text-center">
+                        <!--Product Name-->
+                        <div class="product-name">
+                                <a class="text-uppercase fw-normal" asp-route="detail" asp-route-id="@item.Id">@item.Name</a>
+                        </div>
+                        <!--End Product Name-->
+                        <!--Product Price-->
+                        <div class="product-price">
+                            @if(item.SalePrice == 0){
+                                    <span class="old-price">@string.Format("{0:0,00}", item.Price)vnđ</span>
+                            }
+                            @if(item.SalePrice > 0){
+                                    <span class="old-price">@string.Format("{0:0,00}", item.Price)vnđ</span> <span class="price">@string.Format("{0:0,00}", item.SalePrice)vnđ</span>
+                            }
+                            
+                        </div>
+                        <!-- End Product Price-->
+                    </div>
+                    <!--End Product Details-->
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!--End Product Slider-->
+
+    <!--Store Feature-->
+    <section class="store-features">
+        <div class="container">
+            <div class="row store-info">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3 my-lg-0">
+                    <a class="d-flex clr-none" href="#">
+                        <i class="an an-truck-l"></i>
+                        <div class="detail">
+                            <h5 class="h4 mb-1 body-font"> VẬN CHUYỂN & TRẢ LẠI MIỄN PHÍ </h5>
+                            <p class="sub-text"> Giao hàng miễn phí cho tất cả các đơn đặt hàng tại Hoa Kỳ </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3 my-lg-0">
+                    <a class="d-flex clr-none" href="#">
+                        <i class="an an-dollar-sign-l"></i>
+                        <div class="detail">
+                            <h5 class="h4 mb-1 body-font"> BẢO ĐẢM TIỀN </h5>
+                            <p class="sub-text"> Bảo hành 30 ngày </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3 mb-sm-0 my-lg-0">
+                    <a class="d-flex clr-none" href="#">
+                        <i class="an an-credit-card-l"></i>
+                        <div class="detail">
+                            <h5 class="h4 mb-1 body-font"> THANH TOÁN BẢO MẬT </h5>
+                            <p class="sub-text"> Thanh toán an toàn và đáng tin cậy </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-0 mb-sm-0 my-lg-0">
+                    <a class="d-flex clr-none" href="#">
+                        <i class="an an-truck-l"></i>
+                        <div class="detail">
+                            <h5 class="h4 mb-1 body-font"> Nhiều lựa chọn </h5>
+                            <p class="sub-text"> Hơn 1000 mặt hàng có sẵn </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Store Feature-->
+</div>
+<!--End Body Container-->
+<style>
+    .product-load-more .list-product, .product-load-more .item {
+        display: block;
+    }
+
+    .index-demo12 .store-features {
+        background-color: #4994cb85;
+    }
+
+    .slideshow .middle-left .slideshow-content-in{
+        left: 37% !important;
+    }
+
+    .slideshow-content-in{
+        top:23%!important;
+    }
+
+    .index-demo12 .slideshow .ss-sub-title {
+        font-size: 14px;
+    }
+</style>

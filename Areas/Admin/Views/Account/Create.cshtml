@@ -1,0 +1,109 @@
+﻿@model EquipmentManager.Models.Account
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="row">
+
+    <div class="col-md-12" style="padding: 27px;">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Thêm mới tài khoản</h3>
+            </div>
+            <form asp-action="Create">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6" style="padding: 10px;">
+                            <div class="form-group" style="margin-left: 20px;">
+                                <label for="exampleInputEmail1">Tên đăng nhập</label>
+                                <input type="text" asp-for="Code" class="form-control" id="exampleInputEmail1" placeholder="Tên đăng nhập" style="width: 250px;">
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                                <span class="text-danger">@ViewBag.error</span>
+                            </div>
+                            <div class="form-group" style="margin-left: 20px;">
+                                <label for="exampleInputPassword1">Họ và tên</label>
+                                <input type="text" asp-for="Name" class="form-control" id="exampleInputPassword1" placeholder="Họ và tên" style="width: 500px;">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" style="margin-left: 20px;">
+                                <label for="exampleInputPassword1">Số điện thoại</label>
+                                <input type="text" asp-for="Phone" class="form-control" id="exampleInputPassword1" placeholder="Số điện thoại" style="width: 500px;">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group clearfix " style="width: 500px;margin-left: 20px;">
+                                <label class="col-sm-2 col-form-label" style="margin-top: -10px;">@Html.DisplayNameFor(model => model.Gender)</label>
+                                <div class="icheck-primary d-inline">
+                                    <input type="radio" id="radioPrimary1" value="true" asp-for="Gender" checked>
+                                    <label for="radioPrimary1">
+                                        Nữ
+                                    </label>
+                                </div>
+                                <div class="icheck-primary d-inline" style="margin-left: 39px;">
+                                    <input type="radio" id="radioPrimary2" value="false" asp-for="Gender">
+                                    <label for="radioPrimary2">
+                                        Nam
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-left: 20px;">
+                                <label for="exampleInputPassword1">Ngày sinh</label>
+                                <input type="date" asp-for="Birthday" class="form-control" id="exampleInputPassword1" style="width: 500px;">
+                                <span asp-validation-for="Birthday" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="padding: 10px;">
+                            <div class="form-group" style="margin-left: 48px;">
+                                <label for="exampleInputPassword1">Địa chỉ Email</label>
+                                <input type="email" asp-for="Email" class="form-control" id="exampleInputPassword1" placeholder="Địa chỉ Email" style="width: 500px;">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" style="margin-left: 48px;">
+                                <label for="exampleInputPassword1">Phân quyền</label>
+                                <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId" style="width: 500px;"></select>
+
+                            </div>
+                            <div class="form-group" style="margin-left: 48px;">
+                                <label for="exampleInputPassword1">Địa chỉ</label>
+                                <input type="text" asp-for="Address" class="form-control" id="exampleInputPassword1" placeholder="Địa chỉ" style="width: 500px;">
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" style="margin-left: 48px;">
+                                <label for="exampleInputPassword1">Mật Khẩu</label>
+                                <input type="password" asp-for="Password" class="form-control" id="exampleInputPassword1" placeholder="Mật khẩu" style="width: 500px;">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group clearfix " style="width: 500px;margin-left: 42px;">
+                                <label class="col-sm-3 col-form-label" style="margin-top: -10px;">@Html.DisplayNameFor(model => model.Status)</label>
+                                <div class="icheck-primary d-inline">
+                                    <input type="radio" id="radioPrimary3" value="true" asp-for="Status" checked>
+                                    <label for="radioPrimary3">
+                                        Hoạt động
+                                    </label>
+                                </div>
+                                <div class="icheck-primary d-inline" style="margin-left: 39px;">
+                                    <input type="radio" id="radioPrimary4" value="false" asp-for="Status">
+                                    <label for="radioPrimary4">
+                                        Ngừng hoạt động
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="card-footer">
+                        <button type="submit" value="Create" class="btn btn-info"><i class="fas fa-save"></i> Lưu</button>
+                        <a type="submit" asp-action="Index" class="btn btn-default float-right"><i class="fas fa-undo-alt"></i></a>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

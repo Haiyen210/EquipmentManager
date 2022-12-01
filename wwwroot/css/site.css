@@ -1,0 +1,44 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.card-header a:hover {
+    border: 1px solid #b1b2b4;
+    padding: 2px;
+    background: antiquewhite;
+}
+.card-header a {
+    color: black !important;
+    padding-right:10px;
+}
+.table-bordered > :not(caption) > * {
+     border-width: 0px 0 !important; 
+}
+.card-info:not(.card-outline) > .card-header {
+    background-color: #fff !important;
+}
+.form-group {
+    margin-bottom: 1.4rem !important;
+}
+.clearfix input {
+    height: 22px;
+    width: 22px;
+    vertical-align: top;
+}
+.note-editing-area{
+    height: 300px !important;
+}

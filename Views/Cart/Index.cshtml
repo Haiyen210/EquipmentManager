@@ -1,0 +1,186 @@
+﻿@model IEnumerable<EquipmentManager.Models.Cart>
+@using Newtonsoft.Json
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Filters;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    string loginUser = session.GetString("UserLogin");
+    var userName= "";
+    @foreach (var carts in Model)
+    {
+        userName = carts.userName;
+    }
+}
+<!--Page Wrapper-->
+<div class="page-wrapper">
+
+    <!--Body Container-->
+    <div id="page-content">
+        <!--Collection Banner-->
+        <div class="collection-header">
+            <div class="collection-hero">
+                <div class="collection-hero__image"></div>
+                <div class="collection-hero__title-wrapper container">
+                    <h1 class="collection-hero__title">Giỏ hàng</h1>
+                    <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="" title="Back to the home page">Trang chủ</a><span>|</span><span class="fw-bold">Giỏ hàng</span></div>
+                </div>
+            </div>
+        </div>
+        <!--End Collection Banner-->
+        <!--Main Content-->
+        <div class="container">
+            @if (@Model.Count() > 0 && loginUser == userName)
+            {
+                double total = 0;
+
+                <!--Cart Page-->
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                        <form method="post" class="cart style1">
+
+                            <table class=" table table-borderd table-responsive">
+                                <thead class="cart__row cart__header small--hide">
+                                    <tr>
+                                        <th class="action">&nbsp;</th>
+                                        <th class="text-start">Mã sản phẩm</th>
+                                        <th class="text-start">Tên sản phẩm</th>
+                                        <th class="text-start">Ảnh</th>
+                                        <th class="text-center">Giá tiền</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-center">Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cart in Model)
+                                    {
+
+                                        var thanhtien = cart.Quantity * cart.Price;
+                                        total += (double)thanhtien;
+
+                                        <tr class="cart__row border-bottom line1 cart-flex border-top">
+                                            <td><a asp-action="Remove" asp-route-id="@cart.Id" class="btn btn--secondary cart__remove remove-icon position-static" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove item"><i class="icon an an-times-r"></i></a></td>
+
+                                            <td>
+                                                @cart.Code
+                                            </td>
+                                            <td>
+                                                @cart.Name
+                                            </td>
+                                            <td>
+                                                <a href="product-layout1.html"><img class="cart__image blur-up lazyload" data-src="/images/@cart.Image" src="~/images/@cart.Image" alt="Sunset Sleep Scarf Top" width="80" /></a>
+                                            </td>
+                                            <td class="text-center">
+
+                                                <span class="money">@string.Format("{0:0,00}", @cart.Price)vnđ</span>
+                                            </td>
+                                            <td>
+                                                <div class="cart__qty d-flex justify-content-end justify-content-md-center">
+                                                    <div class="qtyField">
+                                                        <input type="hidden" name="id" value="@cart.Id" />
+                                                         <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r"></i></a>
+                                                        <input class="cart__qty-input qty" type="text" asp-for="@cart.Quantity" id="@($"quantity-{cart.Id}")" value="@cart.Quantity" />
+                                                        <a class="qtyBtn plus" href="javascript:void(0);" style="margin-right: 10px;"><i class="icon an an-plus-r"></i></a>
+                                                        <button style="margin-left: 10px;" class="updatecartitem" data-productid="@cart.Id">
+                                                            Cập nhật
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="money fw-500">@string.Format("{0:0,00}", thanhtien)vnđ</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="7" class="text-end pt-3">
+                                            <a type="submit" asp-action="Clear" name="clear" class="btn btn--link d-inline-flex align-items-center btn--small small--hide" onclick="return confirm('Bạn có chắc muốn xóa tất không ?')"><i class="me-1 icon an an-times-r"></i><span class="ms-1 text-decoration-underline">Xóa hết</span></a>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 cart__footer" style="margin-left: 67%;">
+                        <div class="solid-border">
+                            <div class="row border-bottom pb-2">
+                                <span class="col-6 col-sm-6 cart__subtotal-title">Tổng tiền</span>
+                                <span class="col-6 col-sm-6 text-right"><span class="money">@string.Format("{0:0,00}",total)vnđ</span></span>
+                            </div>
+                            <div class="row border-bottom pb-2 pt-2">
+                                <span class="col-6 col-sm-6 cart__subtotal-title">Phí giao hàng</span>
+                                <span class="col-6 col-sm-6 text-right">Miễn phí</span>
+                            </div>
+                            <div class="row border-bottom pb-2 pt-2">
+                                <span class="col-6 col-sm-6 cart__subtotal-title"><strong>Tổng cộng</strong></span>
+                                <span class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">@string.Format("{0:0,00}", total)vnđ</span></span>
+                            </div>
+                            <p class="cart__shipping pt-0 m-0 fst-normal freeShipclaim"><i class="me-1 align-middle icon an an-truck-l"></i><b>Miễn phí giao hàng</b> </p>
+                            <div class="customCheckbox cart_tearm">
+                                <input type="checkbox" value="allen-vela" id="cart_tearm">
+                                <label for="cart_tearm">Tôi đồng ý với các điều khoản và điều kiện</label>
+                            </div>
+                            <a asp-action="CheckOut" id="cartCheckout" class="btn btn--small-wide rounded mt-4 checkout">Tiến hành kiểm tra</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-success py-2 rounded-1 alert-dismissible fade show cart-alert" role="alert">
+                    <i class="align-middle icon an an-truck icon-large me-2"></i><strong class="text-uppercase"><a asp-controller="Login" asp-action="Index"><u>Đăng Nhập Ngay!</u></a> Hãy đăng nhập để tiếp tục mua hàng !!!!!!!!</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <!--End Cart Page-->
+        </div>
+        <!--End Main Content-->
+    </div>
+    <!--End Body Container-->
+</div>
+<!--End Page Wrapper-->
+<style>
+    textarea, textarea.form-control {
+        padding: 1px 10px !important;
+    }
+
+    .qtyField input {
+        margin: 0;
+        padding: 0px !important;
+        color: #111111;
+        width: 73px !important;
+        height: 30px !important;
+        text-align: center;
+        background: none;
+        border-radius: 5px;
+        border: 1px solid #dddddd;
+    }
+</style>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".updatecartitem").click(function (event) {
+                event.preventDefault();
+                var Id = $(this).attr("data-productid");
+                var Quantity = $("#quantity-" + Id).val();
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.RouteUrl("Update")",
+                    data: {
+                        Id: Id,
+                        Quantity: Quantity
+                    },
+                    success: function (result) {
+                        window.location.href = "@Url.RouteUrl("Cart")";
+                    }
+                });
+            });
+        });
+    </script>
+      }

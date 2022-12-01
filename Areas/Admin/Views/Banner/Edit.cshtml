@@ -1,0 +1,80 @@
+﻿@model EquipmentManager.Models.Banner
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row">
+    <div class="col-lg-6" style="padding-top: 43px;margin-left: 28px;">
+        <div class="card card-info" style="width: 745px;">
+            <div class="card-header">
+                <h3 class="card-title" style="color:black;">Thêm Banner</h3>
+            </div>
+            <form asp-action="Edit" class="form-horizontal" enctype="multipart/form-data">
+                <input asp-for="Id" type="hidden" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="card-body">
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <label asp-for="Code" for="inputEmail3" class="col-sm-2 col-form-label">Mã banner</label>
+                            <div class="col-sm-10">
+                                <input type="text" asp-for="Code" class="form-control" id="inputEmail3" placeholder="Mã banner" style="width: 120px;">
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Name" for="inputPassword3" class="col-sm-2 col-form-label">Tên banner</label>
+                            <div class="col-sm-10">
+                                <input type="text" asp-for="Name" class="form-control" id="inputPassword3" placeholder="Tên banner" style="width: 413px;">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 527px;">
+                            <label for="exampleInputPassword1">Mô tả</label>
+                            <textarea class="form-control" rows="3" placeholder="Mô tả" asp-for="Description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group clearfix ">
+                            <label class="col-sm-2 col-form-label" style="margin-top: -10px;">@Html.DisplayNameFor(model => model.Status)</label>
+
+
+                            <label style="font-weight: 400;">
+                                @Html.RadioButtonFor(model => model.Status, true, Model.Status == true ? new { @Checked = "checked" } : null) Hoạt động
+                            </label>
+
+
+                            <label style="font-weight: 400;margin-left: 39px;">
+                                @Html.RadioButtonFor(model => model.Status, false, Model.Status == false ? new { @Checked = "checked" } : null) Ngừng hoạt động
+                            </label>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Chọn Ảnh</label>
+                            <div class="input-group">
+                                <span class="btn btn-success fileinput-button" style="width: 527px;">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Chọn Ảnh</span>
+                                </span>
+                                <img src="~/images/@Model.Images" id="show_img" style="width: 57%;margin-left: 91px;margin-top: 10px;">
+                                <input asp-for="Images" type="file" id="select_file" style="display:none;width: 57%;margin-left: 91px;margin-top: 10px;">
+                            </div>
+                            <span asp-validation-for="Images" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <input asp-for="CreatedDate" type="hidden" />
+
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" value="Create" class="btn btn-info"><i class="fas fa-save"></i> Lưu</button>
+                    <a type="submit" asp-action="Index" class="btn btn-default float-right"><i class="fas fa-undo-alt"></i></a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,48 @@
+﻿@model EquipmentManager.Models.Role
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row">
+    <div class="col-lg-6" style="padding-top: 43px;margin-left: 28px;">
+        <div class="card card-info" style="width: 745px;">
+            <div class="card-header">
+                <h3 class="card-title" style="color:black;">Chi tiết phân quyền</h3>
+            </div>
+
+            <dl class="row" style="margin-left: 14.5px !important;">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Id)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+                <dd class="col-sm-10">
+                    @if (@Model.Status == true)
+                    {
+                        @Html.Raw("Hoạt động")
+                    }
+                    else
+                    {
+                        @Html.Raw("Ngừng hoạt động")
+                    }
+                </dd>
+            </dl>
+
+            <div class="card-footer">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" value="Create" class="btn btn-info"><i class="fas fa-edit" style="color:#5b5bca;"></i> Sửa</a>
+                <a type="submit" asp-action="Index" class="btn btn-default float-right"><i class="fas fa-undo-alt"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

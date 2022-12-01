@@ -1,0 +1,262 @@
+﻿@model EquipmentManager.Models.Product
+<div id="page-content">
+    <!--Breadcrumbs-->
+    <div class="breadcrumbs-wrapper text-uppercase">
+        <div class="collection-header">
+            <div class="collection-hero">
+                <div class="collection-hero__image"></div>
+                <div class="collection-hero__title-wrapper container">
+                    <h1 class="collection-hero__title">Chi tiết sản phẩm</h1>
+                    <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="" title="Back to the home page">Trang chủ</a><span>|</span><span class="fw-bold">Chi tiết sản phẩm</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Breadcrumbs-->
+    <!--Main Content-->
+    <div class="container">
+        <!--Product Content-->
+        <div class="product-single">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12 col-12">
+                    <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
+                        <div class="zoompro-wrap product-zoom-right">
+                            <div class="zoompro-span"><img id="zoompro" class="zoompro" src="~/images/@Model.Images" data-zoom-image="~/images/@Model.Images" alt="product" /></div>
+                            <div class="product-wish"><a class="wishIcon wishlist rounded m-0" href="my-wishlist.html"><i class="icon an an-heart"></i><span class="tooltip-label left">Available in Wishlist</span></a></div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-6 col-sm-12 col-12">
+                    <!-- Product Info -->
+                    <div class="product-single__meta">
+                        <h1 class="product-single__title">@Model.Name</h1>
+                        <div class="product-info">
+                         <p class="product-type">Mô tả: <span>@Model.Description.ToString().Substring(0,100) ....</span></p>
+                        </div>
+                        <!-- Product Info -->
+                        <div class="product-info">
+                            <p class="product-type">Danh mục: <span>@Model.Category.Name</span></p>
+                        </div>
+                        <!-- End Product Info -->
+                        <!-- Product Price -->
+                        <div class="product-single__price pb-1">
+                            <span class="visually-hidden">Giá tiền</span>
+                            <span class="product-price__sale--single">
+                                @if(Model.SalePrice > 0){
+                                    <span class="product-price-old-price"> @string.Format("{0:0,00}", Model.Price)vnđ</span>
+
+                                    <span class="product-price__price product-price__sale"> @string.Format("{0:0,00}", Model.SalePrice)  vnđ</span>
+
+                                }
+                                @if(Model.SalePrice == 0){
+                                <span class="product-price__price product-price__sale"> @string.Format("{0:0,00}", Model.Price)  vnđ</span>
+
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <!-- End Product Info -->
+                    <!-- Product Form -->
+                    <form method="post" action="#" class="product-form hidedropdown">
+                        <!-- Product Action -->
+                        <div class="product-action w-100 clearfix">
+                            <div class="product-form__item--quantity d-flex-center mb-3">
+                                <div class="qtyField">
+                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
+                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-r" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="pro-stockLbl ms-3">
+                                    <span class="d-flex-center stockLbl instock"><i class="icon an an-check-cil"></i><span> @if(Model.Status == true){
+                                        @Html.Raw("Hoạt động")
+                                        }
+                                        @if(Model.Status == false){
+                                            @Html.Raw("Ngừng hoạt động")
+                                        }</span></span>
+                                   
+                                </div>
+                            </div>
+                            <div class="product-form__item--submit">
+                                <button type="submit" name="add" class="btn rounded product-form__cart-submit" asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id"><span>Thêm vào giỏ hàng</span></button>
+                            </div>
+                            <div class="product-form__item--buyit clearfix">
+                                <button type="button" class="btn rounded btn-outline-primary proceed-to-checkout">Mua ngay</button>
+                            </div>
+                            
+                        </div>
+                      
+                    </form>
+                    <!-- End Product Form -->
+                    <!-- Social Sharing -->
+                    <div class="social-sharing d-flex-center mb-3">
+                        <span class="sharing-lbl me-2">Chia sẻ :</span>
+                        <a href="#" class="d-flex-center btn btn-link btn--share share-facebook" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Facebook"><i class="icon an an-facebook mx-1"></i><span class="share-title d-none">Facebook</span></a>
+                        <a href="#" class="d-flex-center btn btn-link btn--share share-twitter" data-bs-toggle="tooltip" data-bs-placement="top" title="Tweet on Twitter"><i class="icon an an-twitter mx-1"></i><span class="share-title d-none">Tweet</span></a>
+                        <a href="#" class="d-flex-center btn btn-link btn--share share-pinterest" data-bs-toggle="tooltip" data-bs-placement="top" title="Pin on Pinterest"><i class="icon an an-pinterest-p mx-1"></i> <span class="share-title d-none">Pin it</span></a>
+                        <a href="#" class="d-flex-center btn btn-link btn--share share-linkedin" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Linkedin"><i class="icon an an-linkedin mx-1"></i><span class="share-title d-none">Linkedin</span></a>
+                        <a href="#" class="d-flex-center btn btn-link btn--share share-email" data-bs-toggle="tooltip" data-bs-placement="top" title="Share by Email"><i class="icon an an-envelope-l mx-1"></i><span class="share-title d-none">Email</span></a>
+                    </div>
+                    <!-- End Social Sharing -->
+                  
+                </div>
+            </div>
+        </div>
+        <!--Product Content-->
+        <!--Product Tabs-->
+        <div class="tabs-listing mt-2 mt-md-5">
+            <ul class="product-tabs list-unstyled d-flex-wrap border-bottom m-0 d-none d-md-flex">
+                <li rel="description" class="active"><a class="tablink">Mô tả</a></li>
+                <li rel="reviews"><a class="tablink">Đánh giá</a></li>
+            </ul>
+            <div class="tab-container">
+                <h3 class="tabs-ac-style d-md-none active" rel="description">Description</h3>
+                <div id="description" class="tab-content">
+                    <div class="product-description">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-8 col-lg-8 mb-4 mb-md-0">
+                                <h4 class="pt-2 text-uppercase">@Model.Name</h4>
+                                <p>@Model.Description</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="tabs-ac-style d-md-none" rel="reviews">Đánh giá</h3>
+                <div id="reviews" class="tab-content">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="spr-header clearfix d-flex-center justify-content-between">
+                                <div class="spr-summary-actions mt-3 mt-sm-0">
+                                    <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded"><i class="icon an-1x an an-pencil-alt me-2"></i>Viết đánh giá</a>
+                                </div>
+                            </div>
+
+                            <form method="post" action="#" class="product-review-form new-review-form mb-4">
+                                <h4 class="spr-form-title text-uppercase">Viết đánh giá</h4>
+                                <fieldset class="spr-form-contact">
+                                    <div class="spr-form-review-rating form-group">
+                                        <label class="spr-form-label">Đánh giá sao</label>
+                                        <div class="product-review pt-1">
+                                            <div class="review-rating">
+                                                <input type="radio" name="rating" id="rating-5"><label for="rating-5"></label>
+                                                <input type="radio" name="rating" id="rating-4"><label for="rating-4"></label>
+                                                <input type="radio" name="rating" id="rating-3"><label for="rating-3"></label>
+                                                <input type="radio" name="rating" id="rating-2"><label for="rating-2"></label>
+                                                <input type="radio" name="rating" id="rating-1"><label for="rating-1"></label>
+                                            </div>
+                                            <a class="reviewLink d-none" href="#"><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="spr-form-review-body form-group">
+                                        <label class="spr-form-label" for="message">Nội dung <span class="spr-form-review-body-charactersremaining"></span></label>
+                                        <div class="spr-form-input">
+                                            <textarea class="spr-form-input spr-form-input-textarea " id="message" name="message" rows="5" placeholder="Nội dung đánh giá"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="spr-form-actions clearfix">
+                                    <input type="submit" class="btn btn-primary rounded spr-button spr-button-primary" value="Gửi">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Product Tabs-->
+    </div>
+    <!--End Container-->
+    <!--You May Also Like Products-->
+    <section class="section product-slider pb-0" style="margin-bottom: 54px;">
+        <div class="container">
+            <div class="row">
+                <div class="section-header col-12">
+                    <h2 class="text-transform-none">Sản phẩm liên quan</h2>
+                </div>
+            </div>
+            <div class="productSlider grid-products">
+                @foreach (var item in ViewBag.productCate)
+                {
+                <div class="item">
+                    <!--Start Product Image-->
+                    <div class="product-image">
+                        <!--Start Product Image-->
+                            <a asp-route="detail" asp-route-id="@item.Id" class="product-img">
+                            <!-- image -->
+                                <img class="primary blur-up lazyload" data-src="/images/@item.Images" src="~/images/@item.Images" alt="" title="" style="height: 200px;">
+                            <!-- End image -->
+                            <!-- Hover image -->
+                                <img class="hover blur-up lazyload" data-src="/images/@item.Images" src="~/images/@item.Images" alt="" title="" style="height: 200px;">
+                            <!-- End hover image -->
+                        </a>
+                        <!--End Product Image-->
+                        <!--Product Button-->
+                        <div class="button-set style0 d-none d-md-block">
+                            <ul>
+                                <!--Cart Button-->
+                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Giở hàng</span></a></li>
+                                <!--End Cart Button-->
+                                <!--Quick View Button-->
+                                    <li><a class="btn-icon btn cartIcon" asp-route="detail" asp-route-id="@item.Id"><i class="icon an an-search-l"></i></a></li>
+                                <!--End Quick View Button-->
+                                <!--Wishlist Button-->
+                                <li><a class="btn-icon wishlist add-to-wishlist" href=""><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Yêu thích</span></a></li>
+                                <!--End Wishlist Button-->
+                                <!--Compare Button-->
+                                <!--End Compare Button-->
+                            </ul>
+                        </div>
+                        <!--End Product Button-->
+                    </div>
+                    <!--End Product Image-->
+                    <!--Start Product Details-->
+                    <div class="product-details text-center">
+                        <!--Product Name-->
+                        <div class="product-name text-uppercase">
+                                <a asp-route="detail" asp-route-id="@item.Id">@item.Name</a>
+                        </div>
+                        <!--End Product Name-->
+                        <!--Product Price-->
+                        <div class="product-price">
+                                @if (item.SalePrice == 0)
+                                {
+                                    @*  <span class="old-price">$199.00</span>*@
+                                    <span class="price">@string.Format("{0:0,00}", item.Price)vnđ</span>
+                                }
+                                @if (item.SalePrice > 0)
+                                {
+                                    <span class="old-price">@string.Format("{0:0,00}", item.Price)vnđ</span>
+                                    <span class="price">@string.Format("{0:0,00}", item.SalePrice)vnđ</span>
+                                }
+                        </div>
+                    </div>
+                    <!--End Product Details-->
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!--End You May Also Like Products-->
+
+
+
+</div>
+<!--End Body Container-->
+<style>
+    .template-product .product-tabs li a {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        position: relative;
+        display: block;
+        padding: 0 0 10px;
+        background-color: transparent;
+        color: #666;
+        border: none;
+        cursor: pointer;
+        margin-right: 40px;
+    }
+</style>

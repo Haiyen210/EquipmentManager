@@ -1,0 +1,59 @@
+﻿@model EquipmentManager.Models.Banner
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row mb-2">
+    <div class="col-sm-6">
+        <h3>Chi tiết banner</h3>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Banner</a></li>
+            <li class="breadcrumb-item active">Chi tiết banner</li>
+        </ol>
+    </div>
+</div>
+
+
+
+<div class="card card-solid">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="col-12">
+                    <img src="~/images/@Model.Images" class="product-image" alt="Product Image">
+                </div>
+
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3 class="my-3"> @Model.Name - @Model.Code</h3>
+                <p>@Model.Description </p>
+
+
+                <p>
+                    Trạng thái:  @if (Model.Status == true)
+                    {
+                        @Html.Raw("Hoạt động")
+                    }
+                    else
+                    {
+                        @Html.Raw("Ngừng hoạt động")
+                    }
+                </p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="mt-4">
+                <div class="btn  btn-default btn-lg btn-flat">
+                    <a asp-action="Edit" asp-route-id="@Model?.Id"><i class="fas fa-edit" style="color:#5b5bca;">Sửa</i></a>
+                </div>
+                <div class="btn btn-default btn-lg btn-flat">
+                    <a asp-action="Index"><i class="fas fa-undo-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

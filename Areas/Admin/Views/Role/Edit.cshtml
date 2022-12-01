@@ -1,0 +1,59 @@
+﻿@model EquipmentManager.Models.Role
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row">
+    <div class="col-lg-6" style="padding-top: 43px;margin-left: 28px;">
+        <div class="card card-info" style="width: 745px;">
+            <div class="card-header">
+                <h3 class="card-title" style="color:black;">Thêm phân quyền</h3>
+            </div>
+            <form asp-action="Edit" class="form-horizontal">
+                <input asp-for="Id" type="hidden"/>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="card-body">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label asp-for="Name" for="inputPassword3" class="col-sm-3 col-form-label">Tên phân quyền</label>
+                            <div class="col-sm-10">
+                                <input type="text" asp-for="Name" class="form-control" id="inputPassword3" placeholder=" Tên phân quyền" style="width: 413px;">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix ">
+                            <label class="col-sm-2 col-form-label" style="margin-top: -10px;">@Html.DisplayNameFor(model => model.Status)</label>
+
+
+                            <label style="font-weight: 400;">
+                                @Html.RadioButtonFor(model => model.Status, true, Model.Status == true ? new { @Checked = "checked" } : null) Hoạt động
+                            </label>
+
+
+                            <label style="font-weight: 400;margin-left: 39px;">
+                                @Html.RadioButtonFor(model => model.Status, false, Model.Status == false ? new { @Checked = "checked" } : null) Ngừng hoạt động
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" value="Edit" class="btn btn-info"><i class="fas fa-save"></i> Lưu</button>
+                    <a type="submit" asp-action="Index" class="btn btn-default float-right"><i class="fas fa-undo-alt"></i></a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

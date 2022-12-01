@@ -1,0 +1,195 @@
+﻿@using Newtonsoft.Json
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Filters;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    string jsoncart = session.GetString("My-Cart");
+    string loginUser = session.GetString("UserLogin");
+    int carts = 0;
+    var userName = "";
+    if (jsoncart != null)
+    {
+        var cart = JsonConvert.DeserializeObject<List<Cart>>(jsoncart);
+        carts = cart.Count();
+        foreach (var item in cart)
+        {
+            userName = item.userName;
+        }
+    }
+   
+    
+
+}
+
+<div class="header-main header-12">
+    <!--Header-->
+    <header class="header header-wrap mih-90 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <!--Logo / Menu Toggle-->
+                <div class="col-6 col-sm-6 col-md-6 col-lg-3 align-self-center justify-content-start d-flex">
+                    <!--Mobile Toggle-->
+                    <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none"><i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i></button>
+                    <!--End Mobile Toggle-->
+                    <!--Logo-->
+                    <div class="logo"><a><img class="logo-img mh-100" src="~/images/low-res-logo.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" width="100" /><span class="logo-txt d-none"></span></a></div>
+                    <!--End Logo-->
+                </div>
+                <!--End Logo / Menu Toggle-->
+                <!--Search Inline-->
+                <div class="col-1 col-sm-1 col-md-1 col-lg-6 d-none d-lg-block">
+                    <form class="form minisearch search-inline" id="header-search1" action="#" method="get">
+                        <label class="label d-none"><span>Tìm kiếm</span></label>
+                        <div class="control">
+                            <div class="searchField d-flex" style="border: 1px solid rgba(255,255,255,.2);">
+                                <div class="input-box d-flex w-100">
+                                    <input type="text" name="q" placeholder="Tìm kiếm" class="input-text rounded-0 border-start-0 border-end-0" style="color:white">
+                                    <button type="submit" title="Search" class="action search"><i class="icon an an-search-l"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--End Search Inline-->
+                <!--Right Action-->
+                <div class="col-6 col-sm-6 col-md-6 col-lg-3 align-self-center icons-col text-right d-flex justify-content-end">
+                    <!--Search-->
+                    <div class="site-search iconset d-lg-none"><i class="icon an an-search-l"></i><span class="tooltip-label">Tìm kiếm</span></div>
+                    <!--End Search-->
+                    <!--Wishlist-->
+                    <div class="wishlist-link iconset">
+                        <a href="my-wishlist.html"><i class="icon an an-heart-l"></i><span class="wishlist-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle">0</span><span class="tooltip-label">Yêu thích</span></a>
+                    </div>
+                    <!--End Wishlist-->
+                    <!--Setting Dropdown-->
+                    <div class="user-link iconset">
+                        <i class="icon an an-user-expand"></i>@if (loginUser != null)
+                        {
+                            @Html.Raw("(")
+                            @HttpContextAccessor.HttpContext.Session.GetString("UserLogin")
+                            @Html.Raw(")")
+                        }
+                        <span class="tooltip-label">
+                            Tài khoản @if (loginUser != null)
+                            {
+                                @HttpContextAccessor.HttpContext.Session.GetString("UserLogin")
+                            }</span></div>
+                    <div id="userLinks">
+                        <ul class="user-links">
+                            <li><a asp-controller="Login" asp-action="Index">Đăng nhập</a></li>
+                            <li><a asp-controller="Register" asp-action="Index">Đăng kí</a></li>
+                            <li><a href="my-wishlist.html">Yêu thích</a></li>
+                            @if (loginUser != null){
+                                <li><a asp-controller="Login" asp-action="Logout">Đăng xuất</a></li>
+                            }
+                           
+                        </ul>
+                    </div>
+                    <!--End Setting Dropdown-->
+                    <!--Minicart Drawer-->
+                    <div class="header-cart iconset">
+                        <a asp-controller="Cart" asp-action="Index" class="site-header__cart btn-minicart">
+                            <i class="icon an an-sq-bag"></i><span class="site-cart-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle">@if(loginUser == userName){@carts}else{@Html.Raw(0)}</span><span class="tooltip-label">Giỏ hàng</span>
+                        </a>
+                    </div>
+                    <!--End Minicart Drawer-->
+                </div>
+                <!--End Right Action-->
+            </div>
+        </div>
+        <!--Search Popup-->
+        <div id="search-popup" class="search-drawer">
+            <div class="container">
+                <span class="closeSearch an an-times-l"></span>
+                <form class="form minisearch" id="header-search" action="#" method="get">
+                    <label class="label"><span>Search</span></label>
+                    <div class="control">
+                        <div class="searchField" style="border: 1px solid rgba(255,255,255,.2);">
+                            <div class="input-box">
+                                <button type="submit" title="Tìm kiếm" class="action search"><i class="icon an an-search-l"></i></button>
+                                <input type="text" name="q" value="" placeholder="Tìm kiếm" class="input-text">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--End Search Popup-->
+    </header>
+    <!--End Header-->
+    <!--Main Navigation Desktop-->
+    <div class="menu-outer d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">
+                    <nav class="grid__item" id="AccessibleNav">
+                        <ul id="siteNav" class="site-nav medium left hidearrow">
+                            <li class="lvl1 parent megamenu">
+                                <a asp-controller="Home" asp-action="Index">Trang chủ <i class="an an-angle-down-l"></i></a>
+
+                            </li>
+                            <li class="lvl1 parent megamenu">
+                                <a asp-controller="Product" asp-action="Index">Sản phẩm <i class="an an-angle-down-l"></i></a>
+                            </li>
+                            <li class="lvl1 parent dropdown">
+                                <a href="#;">Blog <i class="an an-angle-down-l"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Main Navigation Desktop-->
+</div>
+<!--End Header wrap-->
+<!--Mobile Menu-->
+<div class="mobile-nav-wrapper" role="navigation">
+    <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Đóng</div>
+    <ul id="MobileNav" class="mobile-nav">
+        <li class="lvl1 parent megamenu">
+            <a asp-controller="Home" asp-action="Index">Trang chủ <i class="an an-plus-l"></i></a>
+
+        </li>
+        <li class="lvl1 parent megamenu">
+            <a asp-controller="Product" asp-action="Index">Sản phẩm <i class="an an-plus-l"></i></a>
+
+        </li>
+        <li class="lvl1 parent megamenu">
+            <a href="blog-left-sidebar.html">Blog <i class="an an-plus-l"></i></a>
+        </li>
+        <li class="acLink"></li>
+        <li class="lvl1 bottom-link"><a asp-controller="Login" asp-action="Login">Đăng nhập</a></li>
+        <li class="lvl1 bottom-link"><a asp-controller="Register" asp-action="Index">Đăng Kí</a></li>
+        <li class="lvl1 bottom-link"><a href="my-wishlist.html">Yêu thích</a></li>
+        <li class="help bottom-link"><b>SOS?</b><br>Call: 0362388823</li>
+    </ul>
+</div>
+<style>
+    .header-12 .menu-outer {
+        background-color: #003b6b85;
+        padding: 1px 0;
+    }
+
+    .header-12.header-main, .header-12 .header-wrap {
+        background-color: #11384eed;
+        color: #ffffff;
+    }
+
+    ::placeholder {
+        color: white;
+        opacity: 1;
+    }
+
+    .header-12 #siteNav > li > a {
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+        .header-12 #siteNav > li > a:hover {
+            color: yellow;
+        }
+</style>

@@ -1,0 +1,186 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model X.PagedList.IPagedList<EquipmentManager.Models.Product>
+
+
+
+    <!--Body Container-->
+            <div id="page-content">    
+                <!--Collection Banner-->
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title">Sản phẩm</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a asp-controller="Home" asp-action="Index" title="Back to the home page">Trang chủ</a><span>|</span><span class="fw-bold">Sản phẩm</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Collection Banner-->
+
+                <div class="container">
+                    <div class="row">
+                        <!--Sidebar-->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 sidebar filterbar">
+                            <div class="closeFilter d-block d-lg-none"><i class="icon icon an an-times-r"></i></div>
+                            <div class="sidebar_tags">
+                                <!--Categories-->
+                                <div class="sidebar_widget categories filterBox filter-widget">
+                                    <div class="widget-title"><h2 class="mb-0">Danh mục</h2></div>
+                                    <div class="widget-content filterDD">
+                                        <ul class="clearfix sidebar_categories mb-0">
+                                @foreach (var item in ViewBag.category)
+                                {
+                                    <li class="lvl-1"><a asp-route="product" asp-route-id="@item.Id" class="site-nav">@item.Name</a></li>
+                                }
+                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--Categories-->
+                            </div>
+                        </div>
+                        <!--End Sidebar-->
+
+                        <!--Main Content-->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 main-col">
+                            <!--Toolbar-->
+                            <div class="toolbar mt-0">
+                                <div class="filters-toolbar-wrapper">
+                                    <ul class="list-unstyled d-flex align-items-center">
+                                        <li class="product-count d-flex align-items-center">
+                                            <div class="filters-toolbar__item">
+                                    <span class="filters-toolbar__product-count d-none d-sm-block">Hiển thị: @ViewBag.count Sản phẩm</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--End Toolbar-->
+
+                            <!--Product Grid-->
+                <div class="grid-products grid--view-items shop-grid-5 prd-grid">
+
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-4 item">
+                                <!--Start Product Image-->
+                                <div class="product-image">
+                                    <!--Start Product Image-->
+                                    <a asp-route="detail" asp-route-id="@item.Id" class="product-img">
+                                        <!-- image -->
+                                        <img class="primary blur-up lazyload" data-src="/images/@item.Images" src="~/images/@item.Images" alt="image" title="" style="height: 200px;">
+                                        <!-- End image -->
+                                        <!-- Hover image -->
+                                        <img class="hover blur-up lazyload" data-src="/images/@item.Images" src="~/images/@item.Images" alt="image" title="" style="height: 200px;">
+                                        <!-- End hover image -->
+                                    </a>
+                                    <!--End Product Image-->
+                                    <!--Product Button-->
+                                    <div class="button-set style0 d-none d-md-block">
+                                        <ul>
+                                            <!--Cart Button-->
+                                            <li><a class="btn-icon btn cartIcon " asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Giỏ hàng</span></a></li>                                                <!--End Cart Button-->
+                                            <!--Quick View Button-->
+                                            <li> <a asp-route="detail" asp-route-id="@item.Id" class="btn-icon btn cartIcon"><i class="icon an an-search-l"></i><span class="tooltip-label top">Chi tiết sản phẩm</span></a></li>
+                                            <!--End Quick View Button-->
+                                            <!--Wishlist Button-->
+                                            <li><a class="btn-icon wishlist add-to-wishlist" href=""><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Yêu thích</span></a></li>
+                                            <!--End Wishlist Button-->
+                                        </ul>
+                                    </div>
+                                    <!--End Product Button-->
+                                </div>
+                                <!--End Product Image-->
+                                <!--Start Product Details-->
+                                <div class="product-details text-center">
+                                    <!--Product Name-->
+                                    <div class="product-name text-uppercase">
+                                        <a asp-route="detail" asp-route-id="@item.Id">@item.Name</a>
+                                    </div>
+                                    <!--End Product Name-->
+                                    <!--Product Price-->
+                                    <div class="product-price">
+                                        @if (item.SalePrice == 0)
+                                        {
+                                            @*  <span class="old-price">$199.00</span>*@
+                                            <span class="price">@string.Format("{0:0,00}", item.Price)vnđ</span>
+                                        }
+                                        @if (item.SalePrice > 0)
+                                        {
+                                            <span class="old-price">@string.Format("{0:0,00}", item.Price)vnđ</span>
+                                            <span class="price">@string.Format("{0:0,00}", item.SalePrice)vnđ</span>
+                                        }
+                                    </div>
+                                    <!--End Product Price-->
+                                    <!--Sort Description-->
+                                    <p class="hidden sort-desc">@item.Description</p>
+                                    <!--End Sort Description-->
+                                    <!-- Product Button -->
+                                    <div class="button-action d-flex">
+                                        <div class="addtocart-btn">
+                                            <form class="addtocart" action="#" method="post">
+                                                <a class="btn pro-addtocart-popup" asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="icon hidden an an-cart-l"></i>Giỏ hàng</a>
+                                            </form>
+                                        </div>
+                                        <div class="quickview-btn">
+                                            <a asp-route="detail" asp-route-id="@item.Id" class="btn btn-icon quick-view quick-view-popup"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Chi tiết sản phẩm</span></a>
+                                        </div>
+                                        <div class="wishlist-btn">
+                                            <a class="btn btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Yêu thích</span></a>
+                                        </div>
+                                    </div>
+                                    <!-- End Product Button -->
+                                </div>
+                                <!--End Product Details-->
+                            </div>
+                        }
+                    </div>
+                </div>
+                            <!--End Product Grid-->
+
+                            <!--Pagination Classic-->
+                            <hr class="clear">
+                <div class="pagination" style="margin-bottom:32px">
+                    <ul>
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+                        new PagedListRenderOptions
+                        {
+                        LiElementClasses = new string[] { "page-item" },
+                        PageClasses = new string[] { "page-link" }
+                        }
+                        )
+                    </ul>
+                            </div>
+                            <!--End Pagination Classic-->
+
+                           
+                        </div>
+                        <!--End Main Content-->
+                    </div>
+                </div>
+            </div>
+            <!--End Body Container-->
+ <style>
+             .pagination li.active a {
+            color: #fe877b !important;
+            border-width: 2px !important;
+         
+        }
+        .page-item.active .page-link{
+             border-color: #fe877b !important;
+             background-color: #fff !important;
+             color: #fe877b !important;
+             border-bottom-left-radius: 0px !important;
+             border-top-left-radius:0px !important;
+              border-width: 2px !important;
+        }
+                .page-link {
+            padding: 0.075rem 0.75rem !important;
+        }
+                .page-item:last-child .page-link {
+             border-top-right-radius: 0px !important;
+             border-bottom-right-radius: 0px !important;
+        }
+ </style>

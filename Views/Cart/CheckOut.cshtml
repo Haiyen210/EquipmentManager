@@ -1,0 +1,89 @@
+﻿@model EquipmentManager.Models.Order
+@{
+    double total = 0;
+}
+<!--Body Container-->
+<div id="page-content">
+    <!--Collection Banner-->
+    <div class="collection-header">
+        <div class="collection-hero">
+            <div class="collection-hero__image"></div>
+            <div class="collection-hero__title-wrapper container">
+                <h1 class="collection-hero__title">Kiểm tra thông tin đặt hàng</h1>
+                <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Trang chủ</a><span>|</span><span class="fw-bold">Kiểm tra thông tin đặt hàng</span></div>
+            </div>
+        </div>
+    </div>
+    <!--End Collection Banner-->
+    <!--Main Content-->
+    <div class="container">
+        <form action="" class="checkout-form" method="post">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card--grey">
+                        <div class="card-body">
+                            <h2 class="fs-6">Địa chỉ giao hàng</h2>
+                            <label class="text-uppercase d-none">Tên người đặt hàng:</label>
+                            <div class="form-group"><input type="text" placeholder="Tên người đặt hàng" asp-for="Name" class="form-control"></div>
+                            <label class="text-uppercase d-none">Địa chỉ email:</label>
+                            <div class="form-group"><input type="email" placeholder="Địa chỉ email" asp-for="Email" class="form-control"></div>
+                            <label class="text-uppercase d-none">Số điện thoại:</label>
+                            <div class="form-group"><input type="text" placeholder="Số điện thoại" asp-for="Phone" class="form-control"></div>
+                            <label class="text-uppercase d-none">Địa chỉ nhận hàng:</label>
+                            <div class="form-group"><input type="text" placeholder="Địa chỉ nhận hàng" asp-for="Address" class="form-control"></div>
+                            <label class="text-uppercase d-none">Ghi chú đơn hàng:</label>
+                            <div class="form-group"> <textarea name="note" placeholder="Ghi chú đơn hàng" asp-for="Note" id="cart-note" class="form-control cart-note__input" rows="6"></textarea></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-8 mt-2 mt-lg-0">
+                    <h2 class="title fs-6">Tổng số giỏ hàng</h2>
+                    <div class="table-responsive order-table style1">
+                        <table class="table table-bordered align-middle table-hover text-center mb-1">
+                            <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th class="text-start">Tên sản phẩm</th>
+                                    <th>Giá tền</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.Cart)
+                                {
+
+                                    var thanhtien = item.Quantity * item.Price;
+                                    total += (double)thanhtien;
+                                    <tr>
+                                        <td class="thumbImg"><a href="#" class="thumb d-inline-block"><img class="cart__image" src="~/images/@item.Image" alt="@item.Name" width="80" /></a></td>
+                                        <td class="text-start">
+                                            <a>@item.Name</a>
+                                        </td>
+                                        <td> <span class="money">@string.Format("{0:0,00}", @item.Price)vnđ</span></td>
+                                        <td>@item.Quantity</td>
+                                        <td class="fw-500"><span class="money">@string.Format("{0:0,00}", thanhtien)vnđ</span></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot class="font-weight-600">
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bolder">Phí vận chuyển </td>
+                                    <td class="fw-bolder">Miễn phí</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bolder">Tổng tiền</td>
+                                    <td class="fw-bolder">@string.Format("{0:0,00}", total)vnđ</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="order-button-payment mt-2 clearfix" style="margin-right: 19px;float: right;"><button  class="cartCheckout fs-6 btn btn-lg rounded w-100 fw-600 text-white" style="width: 113%;">Đặt hàng</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--End Main Content-->
+</div>
+<!--End Body Container-->

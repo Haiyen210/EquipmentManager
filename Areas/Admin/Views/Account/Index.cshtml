@@ -1,0 +1,146 @@
+﻿@model X.PagedList.IPagedList<EquipmentManager.Models.Account>
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12" style="padding-top: 15px;">
+        <h3> Tài khoản</h3>
+    </div>
+    <div class="col-12">
+        <div class="card ">
+            <div class="card-header">
+                @* <h3 class="card-title"><a asp-action="Create">Create New</a></h3>*@
+                <a asp-action="Create"> <i class="fas fa-plus" style="color:#0fb10f;"></i>&nbsp;Thêm mới </a>
+                @*<a> <i class="fas fa-edit" style="color:#5b5bca;"></i>&nbsp;Sửa </a>
+                <a> <i class="fas fa-trash-alt" style="color:red"></i>&nbsp;Xóa </a>*@
+                <div class="card-tools" style="margin-right: 0.26rem !important;">
+                    <form action="" method="get">
+                        <div class="input-group input-group-sm" style="width: 251px;">
+                            <input type="text" name="name" class="form-control float-right" placeholder="Tìm kiếm">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card-body table-responsive" style="height: 500px;">
+                <table class="table table-head-fixed text-nowrap table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Code)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Gender)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Birthday)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().RoleId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+                            </th>
+                           @* <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Password)
+                            </th>*@
+                    
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Code)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @if (item.Gender == true)
+                                    {
+                                        @Html.Raw("Nữ")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("Nam")
+                                    }
+                                </td>
+                                <td>
+                                    @String.Format("{0:dd/MM/yyyy}",item.Birthday)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @if (item.Status == true)
+                                    {
+                                        @Html.Raw("Hoạt động")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("Ngừng hoạt động")
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Role.Name)
+                                </td>
+                               @* <td>
+                                    @Html.DisplayFor(model => item.Password)
+                                </td>*@
+                                @* <td> @ViewData["msg"]</td>*@
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id" style="font-size: 20px;"><i class="fas fa-eye" style="color:#28a745e0;"></i></a> |
+                                    <a asp-action="Edit" asp-route-id="@item.Id" style="font-size: 20px;"> <i class="fas fa-edit" style="color:#5b5bca;"></i></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Bạn có chắc muốn xóa tài khoản: @item.Name này không?')" style="font-size: 20px;"><i class="fas fa-trash-alt" style="color:red"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <hr />
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+                new PagedListRenderOptions
+                {
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" }
+                }
+                )
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

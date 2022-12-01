@@ -1,0 +1,120 @@
+﻿@model EquipmentManager.Models.Account
+<div id="page-content">
+    <!--Collection Banner-->
+    <div class="collection-header">
+        <div class="collection-hero">
+            <div class="collection-hero__image"></div>
+            <div class="collection-hero__title-wrapper container">
+                <h1 class="collection-hero__title">Đăng kí</h1>
+                <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Trang Chủ</a><span>|</span><span class="fw-bold">Đăng kí</span></div>
+            </div>
+        </div>
+    </div>
+    <!--End Collection Banner-->
+    <!--Container-->
+    <div class="container">
+        <!--Main Content-->
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 box mt-2 mt-lg-5">
+                <h3 class="h4 text-uppercase mb-3">Đăng kí tài khoản</h3>
+                <form method="post"  accept-charset="UTF-8" class="customer-form">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="CustomerFirstName">Tên tài khoản<span class="required">*</span> </label>
+                                <input id="CustomerFirstName" type="text" asp-for="Code"  placeholder="Tên tài khoản" />
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                                <span class="text-danger"> @ViewBag.error</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="CustomerLastName">Họ và tên <span class="required">*</span></label>
+                                <input id="CustomerLastName" type="text" asp-for="Name" placeholder="Họ và tên" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="CustomerFirstName">Địa chỉ<span class="required">*</span> </label>
+                                <input id="CustomerFirstName" type="text" asp-for="Address" placeholder="Địa chỉ" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="CustomerLastName">Địa chỉ email <span class="required">*</span></label>
+                                <input id="CustomerLastName" type="text" asp-for="Email" placeholder="Địa chỉ email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="CustomerFirstName">Số điện thoại<span class="required">*</span> </label>
+                                <input id="CustomerFirstName" type="text" asp-for="Phone" placeholder="Số điện thoại"  />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="CustomerLastName">Ngày sinh <span class="required">*</span></label>
+                                <input id="CustomerLastName" type="date" asp-for="Birthday" />
+                                <span asp-validation-for="Birthday" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group form-check col-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="newsletter">Giới tính<span class="required">*</span></label>
+                            <div class="customCheckbox clearfix">
+                                <div class="icheck-primary" style="display: -webkit-box;">
+                                    <input type="radio" id="radioPrimary1" value="true" asp-for="Gender" checked style=" height: 18px; width: 18px;">
+                                    <label for="radioPrimary1" style="margin-left: 8px;">
+                                        Nữ
+                                    </label>
+                                </div>
+                                <div class="icheck-primary" style="margin-left: 39px;display: -webkit-box;">
+                                    <input type="radio" id="radioPrimary2" value="false" asp-for="Gender" style=" height: 18px; width: 18px;" />
+                                    <label for="radioPrimary2" style="margin-left:8px;">
+                                        Nam
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="CustomerPassword">Mật khẩu <span class="required">*</span></label>
+                                <input id="CustomerPassword" type="password" asp-for="Password" placeholder="Mật khẩu" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="CustomerConfirmPassword">Xác nhận mật khẩu <span class="required">*</span></label>
+                                <input id="CustomerConfirmPassword" name="ConfirmPassword" type="Password"  placeholder="Nhập lại mật khẩu" />
+                                <span class="text-danger"> @ViewBag.errorPass</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="text-left col-12 col-sm-12 col-md-6 col-lg-6">
+                            <button type="submit" class="btn rounded mb-3">Đăng kí</button>
+                        </div>
+                        <div class="text-right col-12 col-sm-12 col-md-6 col-lg-6">
+                            <a asp-controller="Login" asp-action="Index"><i class="align-middle icon an an-an-double-left me-2"></i>Quay lại đăng nhập</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--End Main Content-->
+    </div>
+    <!--End Container-->
+</div>
+<!--End Body Container-->

@@ -1,0 +1,51 @@
+﻿@model EquipmentManager.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="row">
+    <div class="col-lg-6" style="padding-top: 43px;margin-left: 28px;">
+        <div class="card card-info" style="width: 745px;">
+            <div class="card-header">
+                <h3 class="card-title" style="color:black;">Thêm Danh Mục</h3>
+            </div>
+            <form asp-action="Create" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="card-body">
+                    <div class="card-body">
+                       
+                        <div class="form-group row">
+                            <label asp-for="Code" for="inputEmail3" class="col-sm-2 col-form-label">Mã danh mục</label>
+                            <div class="col-sm-10">
+                                <input type="text" asp-for="Code" class="form-control" id="inputEmail3" placeholder="Mã danh mục" style="width: 120px;">
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                                <span class="text-danger">@ViewBag.error</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Name" for="inputPassword3" class="col-sm-2 col-form-label">Tên danh mục</label>
+                            <div class="col-sm-10">
+                                <input type="text" asp-for="Name" class="form-control" id="inputPassword3" placeholder="Tên danh mục" style="width: 413px;">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" value="Create" class="btn btn-info"><i class="fas fa-save"></i> Lưu</button>
+                    <a type="submit" asp-action="Index" class="btn btn-default float-right"><i class="fas fa-undo-alt"></i></a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
